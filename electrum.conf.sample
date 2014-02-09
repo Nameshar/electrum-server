@@ -13,8 +13,8 @@ password = secret
 banner = Welcome to Electrum for MMC!
 #irc = no
 #irc_nick = <yournickname>
-ssl_certfile = /home/daniel/electrum-server/server.crt
-ssl_keyfile = /home/daniel/electrum-server/server.key
+ssl_certfile = /path/to/electrum-server/server.crt
+ssl_keyfile = /path/to/electrum-server/server.key
 
 # default backend is leveldb (pruning server)
 # DO NOT EDIT THIS OPTION (libbitcoin is currently not supported)
@@ -27,7 +27,7 @@ pruning_limit = 100
 
 [memorycoind]
 host = localhost
-port = 9332
+port = 1968
 # user and password from bitcoin.conf
 user = user
 password = password
