@@ -70,7 +70,9 @@ def header_to_string(res):
         + rev_hex(res.get('merkle_root')) \
         + int_to_hex(int(res.get('timestamp')), 4) \
         + int_to_hex(int(res.get('bits')), 4) \
-        + int_to_hex(int(res.get('nonce')), 4)
+        + int_to_hex(int(res.get('nonce')), 4) \
+        + int_to_hex(int(res.get('birthdayA')), 4) \
+        + int_to_hex(int(res.get('birthdayB')), 4)
 
 
 def hex_to_int(s):
@@ -85,6 +87,8 @@ def header_from_string(s):
         'timestamp': hex_to_int(s[68:72]),
         'bits': hex_to_int(s[72:76]),
         'nonce': hex_to_int(s[76:80]),
+        'birthdayA': hex_to_int(s[80:84]),
+        'birthdayB': hex_to_int(s[84:88])
     }
 
 
@@ -107,7 +111,7 @@ def public_key_to_bc_address(public_key):
     return hash_160_to_bc_address(hash_160(public_key))
 
 
-def hash_160_to_bc_address(h160, addrtype = 0):
+def hash_160_to_bc_address(h160, addrtype = 50):
     if h160 == 'None':
         return 'None'
     vh160 = chr(addrtype) + h160

@@ -66,10 +66,10 @@ class BlockchainProcessor(Processor):
             self.shared.stop()
 
         self.bitcoind_url = 'http://%s:%s@%s:%s/' % (
-            config.get('bitcoind', 'user'),
-            config.get('bitcoind', 'password'),
-            config.get('bitcoind', 'host'),
-            config.get('bitcoind', 'port'))
+            config.get('memorycoind', 'user'),
+            config.get('memorycoind', 'password'),
+            config.get('memorycoind', 'host'),
+            config.get('memorycoind', 'port'))
 
         while True:
             try:
@@ -94,7 +94,7 @@ class BlockchainProcessor(Processor):
             traceback.print_exc(file=sys.stdout)
             print_log('initializing database')
             self.height = 0
-            self.last_hash = '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f'
+            self.last_hash = '0167f68b07587c231403069612646700deb086acc423a7b85f3304ac372e81d9'
             db_version = self.db_version
 
         # check version
@@ -200,6 +200,8 @@ class BlockchainProcessor(Processor):
             "timestamp": b.get('time'),
             "bits": int(b.get('bits'), 16),
             "nonce": b.get('nonce'),
+            "birthdayA": b.get('birthdayA'),
+            "birthdayB": b.get('birthdayB')
         }
 
     def get_header(self, height):
@@ -212,7 +214,7 @@ class BlockchainProcessor(Processor):
         self.headers_filename = os.path.join(self.dbpath, 'blockchain_headers')
 
         if os.path.exists(self.headers_filename):
-            height = os.path.getsize(self.headers_filename)/80 - 1   # the current height
+            height = os.path.getsize(self.headers_filename)/88 - 1   # the current height
             if height > 0:
                 prev_hash = self.hash_header(self.read_header(height))
             else:
@@ -247,16 +249,16 @@ class BlockchainProcessor(Processor):
     def read_header(self, block_height):
         if os.path.exists(self.headers_filename):
             with open(self.headers_filename, 'rb') as f:
-                f.seek(block_height * 80)
-                h = f.read(80)
-            if len(h) == 80:
+                f.seek(block_height * 88)
+                h = f.read(88)
+            if len(h) == 88:
                 h = header_from_string(h)
                 return h
 
     def read_chunk(self, index):
         with open(self.headers_filename, 'rb') as f:
-            f.seek(index*2016*80)
-            chunk = f.read(2016*80)
+            f.seek(index*88)
+            chunk = f.read(88)
         return chunk.encode('hex')
 
     def write_header(self, header, sync=True):
@@ -281,7 +283,7 @@ class BlockchainProcessor(Processor):
         if not self.headers_data:
             return
         with open(self.headers_filename, 'rb+') as f:
-            f.seek(self.headers_offset*80)
+            f.seek(self.headers_offset*88)
             f.write(self.headers_data)
         self.headers_data = ''
 

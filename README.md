@@ -3,14 +3,15 @@ Electrum-server for the Electrum client
 
   * Author: thomasv@bitcointalk
   * Language: Python
+  * Edited for MMC by: KillerByte (vote for CNO: MVTEcnogH2ArcvpkYJ66GcErb1iwHhLPN1)
 
 Features
 --------
 
-  * The server uses a bitcoind and a leveldb backend.
+  * The server uses a memorycoind and a leveldb backend.
   * The server code is open source. Anyone can run a server, removing single
     points of failure concerns.
-  * The server knows which set of Bitcoin addresses belong to the same wallet,
+  * The server knows which set of Memorycoin addresses belong to the same wallet,
     which might raise concerns about anonymity. However, it should be possible
     to write clients capable of using several servers.
 
