@@ -1,16 +1,16 @@
 [server]
 host = localhost
 #report_host = 
-stratum_tcp_port = 60001
-stratum_http_port = 9081
-#stratum_tcp_ssl_port = 60002
-#stratum_http_ssl_port = 9082
-#report_stratum_tcp_port = 60001
-#report_stratum_http_port = 80
-#report_stratum_tcp_ssl_port = 60002
-#report_stratum_http_ssl_port = 443
+stratum_tcp_port = 70001
+stratum_http_port = 7081
+#stratum_tcp_ssl_port = 70002
+#stratum_http_ssl_port = 7082
+#report_stratum_tcp_port = 70001
+#report_stratum_http_port = 70
+#report_stratum_tcp_ssl_port = 70002
+#report_stratum_http_ssl_port = 743
 password = secret
-banner = Welcome to Electrum for MMC!
+banner = Welcome to Electrum for PTS!
 #irc = no
 #irc_nick = <yournickname>
 ssl_certfile = /path/to/electrum-server/server.crt
@@ -25,7 +25,7 @@ path = /path/to/your/database
 # for each address, history will be pruned if it is longer than this limit
 pruning_limit = 100
 
-[memorycoind]
+[protosharesd]
 host = localhost
 port = 1968
 # user and password from bitcoin.conf

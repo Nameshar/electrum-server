@@ -66,10 +66,10 @@ class BlockchainProcessor(Processor):
             self.shared.stop()
 
         self.bitcoind_url = 'http://%s:%s@%s:%s/' % (
-            config.get('memorycoind', 'user'),
-            config.get('memorycoind', 'password'),
-            config.get('memorycoind', 'host'),
-            config.get('memorycoind', 'port'))
+            config.get('Protosharesd', 'user'),
+            config.get('Protosharesd', 'password'),
+            config.get('Protosharesd', 'host'),
+            config.get('Protosharesd', 'port'))
 
         while True:
             try:
@@ -94,7 +94,7 @@ class BlockchainProcessor(Processor):
             traceback.print_exc(file=sys.stdout)
             print_log('initializing database')
             self.height = 0
-            self.last_hash = '0167f68b07587c231403069612646700deb086acc423a7b85f3304ac372e81d9'
+            self.last_hash = '000fdcd47b7e75a46a2aded5f3335c90eb2224e01ab19ec64ffdd1b437d7b8c0'
             db_version = self.db_version
 
         # check version

@@ -12,7 +12,7 @@ requirements.
 
 The most up-to date version of this document is available at:
 
-    https://github.com/KillerByte/electrum-server/blob/master/HOWTO.md
+    https://github.com/Nameshar/electrum-server/blob/master/HOWTO.md
 
 Conventions
 -----------
@@ -20,8 +20,8 @@ Conventions
 In this document, lines starting with a hash sign (#) or a dollar sign ($)
 contain commands. Commands starting with a hash should be run as root,
 commands starting with a dollar should be run as a normal user (in this
-document, we assume that user is called 'memorycoin'). We also assume the
-memorycoin user has sudo rights, so we use '$ sudo command' when we need to.
+document, we assume that user is called 'Protoshares'). We also assume the
+Protoshares user has sudo rights, so we use '$ sudo command' when we need to.
 
 Strings that are surrounded by "lower than" and "greater than" ( < and > )
 should be replaced by the user with something appropriate. For example,
@@ -55,8 +55,8 @@ Python libraries.
 **Hardware.** The lightest setup is a pruning server with diskspace 
 requirements well under 1 GB growing very moderately and less taxing 
 on I/O and CPU once it's up and running. However note that you also need
-to run memorycoind and keep a copy of the full blockchain. If you have
-less than 2 GB of RAM make sure you limit memorycoind to 8 concurrent 
+to run Protosharesd and keep a copy of the full blockchain. If you have
+less than 2 GB of RAM make sure you limit Protosharesd to 8 concurrent 
 connections. If you have more ressources to spare you can run the server 
 with a higher limit of historic transactions per address. CPU speed is also 
 important, mostly for the initial block chain import, but also if you plan 
@@ -75,12 +75,12 @@ We will also use the `~/bin` directory to keep locally installed files
 (others might want to use `/usr/local/bin` instead). We will download source
 code files to the `~/src` directory.
 
-    # sudo adduser memorycoin --disabled-password
-    # su - memorycoin
+    # sudo adduser Protoshares --disabled-password
+    # su - Protoshares
     $ mkdir ~/bin ~/src
     $ echo $PATH
 
-If you don't see `/home/memorycoin/bin` in the output, you should add this line
+If you don't see `/home/Protoshares/bin` in the output, you should add this line
 to your `.bashrc`, `.profile` or `.bash_profile`, then logout and relogin:
 
     PATH="$HOME/bin:$PATH"
@@ -93,49 +93,49 @@ our ~/bin directory:
     $ mkdir -p ~/src/electrum
     $ cd ~/src/electrum
     $ sudo apt-get install git
-    $ git clone https://github.com/KillerByte/electrum-server.git server
+    $ git clone https://github.com/Nameshar/electrum-server.git server
     $ chmod +x ~/src/electrum/server/server.py
     $ ln -s ~/src/electrum/server/server.py ~/bin/electrum-server
 
-### Step 3. Download memorycoind
+### Step 3. Download Protosharesd
 
-The latest version of memorycoin from Git is required.
+The latest version of Protoshares from Git is required.
 
 Here are some pointers for Ubuntu:
 
-    $ git clone https://github.com/memorycoin/memorycoin/
-    $ cd memorycoin/src
+    $ git clone https://github.com/Protoshares/Protoshares/
+    $ cd Protoshares/src
     $ sudo apt-get install make g++ python-leveldb libboost-all-dev libssl-dev libdb++-dev 
     $ make USE_UPNP= -f makefile.unix
-    $ strip ~/src/memorycoin/src/memorycoind
-    $ ln -s ~/src/memorycoin/src/memorycoind ~/bin/memorycoind
+    $ strip ~/src/Protoshares/src/Protosharesd
+    $ ln -s ~/src/Protoshares/src/Protosharesd ~/bin/Protosharesd
 
-### Step 4. Configure and start memorycoind
+### Step 4. Configure and start Protosharesd
 
-In order to allow Electrum to "talk" to `memorycoind`, we need to set up a RPC
-username and password for `memorycoind`. We will then start `memorycoind` and
+In order to allow Electrum to "talk" to `Protosharesd`, we need to set up a RPC
+username and password for `Protosharesd`. We will then start `Protosharesd` and
 wait for it to complete downloading the blockchain.
 
-    $ mkdir ~/.memorycoin
-    $ $EDITOR ~/.memorycoin/memorycoin.conf
+    $ mkdir ~/.Protoshares
+    $ $EDITOR ~/.Protoshares/Protoshares.conf
 
-Write this in `memorycoin.conf`:
+Write this in `Protoshares.conf`:
 
     rpcuser=<rpc-username>
     rpcpassword=<rpc-password>
     daemon=1
 
-Start `memorycoind`:
+Start `Protosharesd`:
 
-    $ memorycoind
+    $ Protosharesd
 
-Allow some time to pass, so `memorycoind` connects to the network and starts
+Allow some time to pass, so `Protosharesd` connects to the network and starts
 downloading blocks. You can check its progress by running:
 
-    $ memorycoind getinfo
+    $ Protosharesd getinfo
 
-You should also set up your system to automatically start memorycoind at boot
-time, running as the 'memorycoin' user. Check your system documentation to
+You should also set up your system to automatically start Protosharesd at boot
+time, running as the 'Protoshares' user. Check your system documentation to
 find out the best way to do this.
 
 ### Step 5. Install Electrum dependencies
@@ -253,9 +253,9 @@ more often.
 
 Two more things for you to consider:
 
-1. To increase security you may want to close memorycoind for incoming connections and connect outbound only
+1. To increase security you may want to close Protosharesd for incoming connections and connect outbound only
 
-2. Consider restarting memorycoind (together with electrum-server) on a weekly basis to clear out unconfirmed
+2. Consider restarting Protosharesd (together with electrum-server) on a weekly basis to clear out unconfirmed
    transactions from the local the memory pool which did not propagate over the network
 
 ### Step 12. (Finally!) Run Electrum server
